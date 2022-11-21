@@ -27,6 +27,8 @@ urlpatterns = [
     path('category/<int:id>/<slug:slug>', views.category_products, name='category_products'),
     path('product/<int:id>/<slug:slug>', views.product_detail, name='product_detail'),
     #path('product/addcomment/<int:id>', views.addcomment, name='addcomment')
+    path('login/',views.login_view,name='login_view'),
+    path('logout/',views.logout_view,name='logout_view'),
 
 ]
 if settings.DEBUG:  # new

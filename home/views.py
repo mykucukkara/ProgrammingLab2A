@@ -1,4 +1,6 @@
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
+from django.core.checks import messages
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from product.models import Category, Product, Images, Comment
@@ -37,3 +39,25 @@ def product_detail(request, id, slug):
                'productImages': productImages,
                'comments': comments}
     return render(request, 'product_detail.html', context)
+
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            return HttpResponseRedirect('/login')
+    category = Category.objects.all()
+    context = {'category': category, }
+    return render(request, 'login.html', context)
+
+
+def logout_view(request):
+    url = request.META.get('HTTP_REFERER')
+    logout(request)
+    return HttpResponseRedirect(url)

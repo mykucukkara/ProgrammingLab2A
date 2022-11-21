@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -31,3 +32,5 @@ def addcomment(request, id):
     messages.error(request, "Kaydedilme işlemi gerçekleştirilemedi. Lütfen kontrol ediniz.")
     return HttpResponseRedirect(url)
     #return HttpResponse("Kaydedilme işlemi gerçekleştirilemedi.")
+
+
