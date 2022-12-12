@@ -1,12 +1,15 @@
+
 from django.contrib.auth import authenticate, login, logout
 from django.core.checks import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
+from home.models import Setting, UserProfile
 from product.models import Category, Product, Images, Comment
 
 
 # Create your views here.
+
 def index(request):
     category = Category.objects.all()
     dayproducts = Product.objects.all()[:4]
@@ -56,8 +59,11 @@ def login_view(request):
     context = {'category': category, }
     return render(request, 'login.html', context)
 
-
 def logout_view(request):
-    url = request.META.get('HTTP_REFERER')
     logout(request)
-    return HttpResponseRedirect(url)
+    return HttpResponseRedirect('/')
+
+
+
+
+

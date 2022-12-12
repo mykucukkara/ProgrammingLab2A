@@ -29,6 +29,8 @@ urlpatterns = [
     #path('product/addcomment/<int:id>', views.addcomment, name='addcomment')
     path('login/',views.login_view,name='login_view'),
     path('logout/',views.logout_view,name='logout_view'),
+    path('user/', include('user.urls')),
+
 
 ]
 if settings.DEBUG:  # new
